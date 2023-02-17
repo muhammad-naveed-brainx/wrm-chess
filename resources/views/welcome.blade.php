@@ -17,14 +17,6 @@
 
 </div>
 
-<label>Status:</label>
-<div id="status"></div>
-<label>FEN:</label>
-<div id="fen"></div>
-<label>PGN:</label>
-<div id="pgn"></div>
-
-
 <!-- Modal for sending invitation -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -98,31 +90,9 @@
     }
 </style>
 <script>
-
     $(document).ready(function () {
         $('#inviteBtn').on('click', sendInvite)
         $('#codeSubmitBtn').on('click', sendCode)
     })
-    //
-    // $.ajax('/jquery/submitData', {
-    //     type: 'POST',  // http method
-    //     data: { myData: 'This is my data.' },  // data to submit
-    //     success: function (data, status, xhr) {
-    //         $('p').append('status: ' + status + ', data: ' + data);
-    //     },
-    //     error: function (jqXhr, textStatus, errorMessage) {
-    //         $('p').append('Error' + errorMessage);
-    //     }
-    // });
-
-    // error: function (request, status, error) {
-    //     json = $.parseJSON(request.responseText);
-    //     $.each(json.errors, function(key, value){
-    //         $('.alert-danger').show();
-    //         $('.alert-danger').append('<p>'+value+'</p>');
-    //     });
-
-
-
 </script>
 @endsection
