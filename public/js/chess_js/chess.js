@@ -12,8 +12,6 @@ let config = {
 }
 let board = null
 board = Chessboard('myBoard', config)
-$('#startBtn').on('click', board.start)
-$('#clearBtn').on('click', board.clear)
 
 let game = new Chess()
 let $status = $('#status')

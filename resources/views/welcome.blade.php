@@ -1,31 +1,6 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Laravel</title>
-    <!-- chessboard css -->
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/chessboard-1.0.0.min.css') }}">
-    <!-- public javascript and css -->
-    <script src="{{ asset('js/app.js') }}"></script>
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Nunito', sans-serif;
-        }
-    </style>
-    {{--iosocket client--}}
-    <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"
-            integrity="sha384-/KNQL8Nu5gCHLqwqfQjA689Hhoqgi2S84SNUxC3roTe4EhJ9AfLkp8QiQcU8AMzI" crossorigin="anonymous"></script>
-</head>
-
-
-<body class="container mt-5">
+@extends('layout.master')
+@section('content')
 <div id="myBoard" style="width: 400px"></div>
-<div class="mt-4">
-    <button id="startBtn" class="btn btn-primary btn-sm">Start Position</button>
-    <button id="clearBtn" class="btn btn-warning btn-sm">Clear Board</button>
-</div>
 <div class="mt-2">
     <!-- Button trigger email modal -->
     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
@@ -150,4 +125,4 @@
 
 
 </script>
-</html>
+@endsection
