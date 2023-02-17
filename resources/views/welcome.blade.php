@@ -70,11 +70,10 @@
 
 
 @routes
-</body>
 <!-- chessboard javascript -->
 <script src="{{ asset('js/chessboard-1.0.0.min.js') }}"></script>
 <!-- My custom script files-->
-<script src="{{ asset('js/chess_js/chess.js') }}"></script>
+<script src="{{ asset('js/chess_js/initial_chess.js') }}"></script>
 <script src="{{ asset('js/chess_js/ajax_functions.js') }}"></script>
 <style>
     .hidden {
