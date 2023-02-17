@@ -18,6 +18,9 @@ class CreateGamesTable extends Migration
             $table->string('game_code');
             $table->foreignId('player1_id');
             $table->foreignId('player2_id');
+            $table->boolean('verified')->default(false);
+            $table->string('fen')->nullable(true);
+            $table->json('move')->nullable();
             $table->timestamps();
         });
     }

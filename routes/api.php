@@ -21,4 +21,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::prefix('/games')->group(function () {
     Route::post('/invite', [UserController::class, 'sendCode'])->name('user.sendCode');
+    Route::post('/verify', [UserController::class, 'verifyCode'])->name('user.verifyCode');
+    Route::post('/update/fen', [UserController::class, 'updateFen'])->name('user.updateFen');
 });

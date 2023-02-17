@@ -48,8 +48,8 @@ class GameCodeNotification extends Notification
         return (new MailMessage)
             ->subject('Game Code')
             ->greeting('Hello, ' . $this->user->name)
-                    ->line('Let\'s play game. Please enter the code'. $this->gameCode)
-                    ->line('Or Click on following link to join the game')
+                    ->line('Let\'s play game. Please enter the code '. $this->gameCode)
+                    ->line('Or \n Click on following link to join the game')
                     ->action('Click here', url('/'))
                     ->line('Thank you for your time!');
     }
