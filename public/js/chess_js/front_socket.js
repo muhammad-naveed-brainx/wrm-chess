@@ -29,12 +29,15 @@ function saveAndEmitMove(moveObj, fen) {
     })
 }
 
+// sendStatusToClient
+
+frontSocket.on('inializeBoardClient', (gameObj) => {
+    window.location.href = '/game/' + gameObj.game_code + '?player=' + gameObj.player2_id;
+})
 frontSocket.on('sendMoveToClient', (payload) => {
     game.move(payload.move);
     board.position(game.fen());
-});
-frontSocket.on('inializeBoardClient', (gameObj) => {
-    // window.location.href = '/game/' + gameObj.game_code;
-    playerId = gameObj.player2_id
-    console.log("playerId in Initialize board client", playerId)
 })
+frontSocket.on('sendStatusToClient', (status) => {
+    $status.html(status)
+});

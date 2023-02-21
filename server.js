@@ -26,6 +26,11 @@ io.on('connection', (socket) => {
     socket.on('inializeBoardServer', (gameObj) => {
         socket.broadcast.emit('inializeBoardClient', gameObj)
     })
+    // sendStatusToServer
+
+    socket.on('sendStatusToServer', (status) => {
+        socket.broadcast.emit('sendStatusToClient', status)
+    })
 
 
 

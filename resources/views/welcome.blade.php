@@ -1,6 +1,6 @@
 @extends('layout.master')
 @section('content')
-<div id="myBoard" style="width: 400px"></div>
+<div id="myBoard"></div>
 <div class="mt-2">
     <!-- Button trigger email modal -->
     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">

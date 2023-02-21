@@ -1,5 +1,6 @@
 let gameCode;    //global variable
 let playerId;
+let paramsFound = false;
 let config = {
     draggable: true,
     sparePieces: false, //for showing pieces outside the board
@@ -16,7 +17,18 @@ let game
 let gameData = JSON.parse(document.getElementById('my-data').dataset.json);
 let fen = gameData.fen
 gameCode = gameData.game_code
-playerId = gameData.player1_id
+
+// writing code for different users on the basis of url
+let url = window.location.href
+let arr = url.split('?');
+if (arr.length > 1 && arr[1] !== '') {
+    //query parameters found so it is player2
+    playerId = gameData.player2_id
+    paramsFound = true
+}
+else {
+    playerId = gameData.player1_id
+}
 if (fen) {
     config.position = fen
     game = new Chess(fen)
@@ -49,6 +61,10 @@ function greySquare(square) {
 }
 
 function onMouseoverSquare(square, piece) {
+    // show highilighted moves to only correct side
+    if (piece) {
+        if ((paramsFound && piece.search(/^w/) !== -1) || (!paramsFound && piece.search(/^b/) !== -1)) return;
+    }
     // get list of possible moves for this square
     let moves = game.moves({
         square: square, verbose: true
@@ -120,7 +136,7 @@ function updateStatus() {
 
     // checkmate?
     if (game.inCheck()) {
-        status = 'Game over, ' + moveColor + ' is in checkmate.'
+        status = moveColor + ' is in Check.'
     }
 
     // draw?
@@ -139,6 +155,7 @@ function updateStatus() {
     }
 
     $status.html(status)
+    frontSocket.emit('sendStatusToServer', status);
     $fen.html(game.fen())
     $pgn.html(game.pgn())
 }

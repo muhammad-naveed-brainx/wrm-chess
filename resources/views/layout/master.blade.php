@@ -19,6 +19,11 @@
             integrity="sha384-/KNQL8Nu5gCHLqwqfQjA689Hhoqgi2S84SNUxC3roTe4EhJ9AfLkp8QiQcU8AMzI" crossorigin="anonymous"></script>
 </head>
 <body class="container mt-5">
-    @yield('content')
+<h1>WRM CHESS</h1>
+<div class="row">
+    <div class="col-6">
+        @yield('content')
+    </div>
+</div>
 </body>
 </html>
