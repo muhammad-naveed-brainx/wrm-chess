@@ -1,6 +1,3 @@
-let gamePlayers; //global variable
-let gameCode;
-let playerId;
 function sendInvite() {
     let email = $("#email").val();
     $.ajax('/api/games/invite', {
@@ -32,12 +29,10 @@ function sendCode() {
         data: {code: code, id: 7},
         // id of authenticated user and then start game from here
         success: function (data, status, request) {
-            board.start() // set board on position start
+            //board.start() // set board on position start
             gameObj = data.data
-            playerId = gameObj.player1_id
-            gameCode = gameObj.game_code
             frontSocket.emit("inializeBoardServer", gameObj)
-            // console.log("how can i get game coe", data.data)
+            window.location.href = '/game/' + gameObj.game_code;
         },
         error: function (request, testStatus, errorMessage) {
             jsonData = $.parseJSON(request.responseText)

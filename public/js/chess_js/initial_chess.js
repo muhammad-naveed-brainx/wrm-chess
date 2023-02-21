@@ -1,4 +1,3 @@
-let frontSocket; //global
 let config = {
     draggable: true,
     sparePieces: false, //for showing pieces outside the board

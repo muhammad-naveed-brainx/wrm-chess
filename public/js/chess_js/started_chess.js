@@ -1,9 +1,10 @@
-let frontSocket; //global
+let gameCode;    //global variable
+let playerId;
 let config = {
     draggable: true,
     sparePieces: false, //for showing pieces outside the board
     showNotation: false,
-    position: {}, // for showing empty board initially
+    position: 'start', // for showing empty board initially
     onDragStart: onDragStart,
     onDrop: onDrop,
     onMouseoutSquare: onMouseoutSquare,
@@ -11,9 +12,20 @@ let config = {
     onSnapEnd: onSnapEnd
 }
 let board = null
+let game
+let gameData = JSON.parse(document.getElementById('my-data').dataset.json);
+let fen = gameData.fen
+gameCode = gameData.game_code
+playerId = gameData.player1_id
+if (fen) {
+    config.position = fen
+    game = new Chess(fen)
+}
+else {
+    game = new Chess()
+}
 board = Chessboard('myBoard', config)
 
-let game = new Chess()
 let $status = $('#status')
 let $fen = $('#fen')
 let $pgn = $('#pgn')
@@ -133,46 +145,3 @@ function updateStatus() {
 
 
 updateStatus()
-
-/**
- * Socket io function
- * @returns {*}
- */
-function getSocket() {
-    let ip_address = '127.0.0.1';
-    let socket_port = '3000';
-    return  io(ip_address + ':' + socket_port)
-}
-if (!frontSocket) {
-    frontSocket = getSocket()
-}
-
-function saveAndEmitMove(moveObj, fen) {
-    const myJSON = JSON.stringify(moveObj);
-    // console.log("move object is =", myJSON, fen)
-    $.ajax('/api/games/update/fen', {
-        type: 'POST',
-        data: {move: myJSON, code: gameCode, fen: fen},
-        success: function (data, status, request) {
-            let payload = {"move": moveObj, "fen": fen}
-            // console.log(piece)
-            frontSocket.emit('sendMoveToServer', payload);
-        },
-        error: function (request, testStatus, errorMessage) {
-            jsonData = $.parseJSON(request.responseText)
-            $.each(jsonData.errors, function(key, value){
-                alert(value)
-            });
-        }
-    })
-}
-
-frontSocket.on('sendMoveToClient', (payload) => {
-    game.move(payload.move);
-    board.position(game.fen());
-});
-frontSocket.on('inializeBoardClient', (gameObj) => {
-    board.start() // set board on position start
-    playerId = gameObj.player2_id
-    gameCode = gameObj.game_code
-})

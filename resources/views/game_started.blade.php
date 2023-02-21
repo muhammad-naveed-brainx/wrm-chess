@@ -5,10 +5,12 @@
     <label for="status">Status:</label>
     <p id="status"></p>
 </div>
+<div id="my-data" data-json="{{ json_encode($game) }}" style="display:none;"></div>
 @routes
 <!-- chessboard javascript -->
 <script src="{{ asset('js/chessboard-1.0.0.min.js') }}"></script>
 <!-- My custom script files-->
+<script src="{{ asset('js/chess_js/front_socket.js') }}"></script>
 <script src="{{ asset('js/chess_js/started_chess.js') }}"></script>
 <script src="{{ asset('js/chess_js/ajax_functions.js') }}"></script>
 @endsection

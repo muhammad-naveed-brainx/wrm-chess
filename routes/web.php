@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Models\Game;
+use App\Http\Controllers\GameController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,12 +15,8 @@ use App\Models\Game;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-Route::get('/game/{game:game_code}', function (Game $game) {
-    return view('game_started', $game);
-});
+Route::get('/', [GameController::class, 'index'])->name('game.index');
+Route::get('/game/{game:game_code}', [GameController::class, 'gameStart'])->name('game.start');
 Route::get('/socket', function () {
     return view('testsocket');
 });

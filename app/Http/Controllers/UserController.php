@@ -47,6 +47,8 @@ class UserController extends Controller
             'Code verified successfully',
             $game, 200
         );
+        // return redirect()->route('game.start', ['game'=>$gameCode])->with(['game-obj' => $game]);
+
     }
 
     public function updateFen(FenRequest $request)
